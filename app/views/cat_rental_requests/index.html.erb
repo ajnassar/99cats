@@ -1,0 +1,12 @@
+<h2>Cats Rentals, Yo</h2>
+
+<% @requests.each do |request| %>
+  <%= request.cat.name %>:
+  <%= request.start_date %>:
+  <%= request.end_date %>:
+  <%= link_to(request.status, cat_rental_request_url(request))%> <br>
+<% end %>
+
+<br>
+
+<a href="<%= new_cat_rental_request_url%>"> <button>New</button> </a>

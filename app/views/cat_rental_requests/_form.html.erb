@@ -1,0 +1,52 @@
+<% request.errors.full_messages.each do |message| %>
+  <%= message %>
+<% end %>
+
+<form action="<%= request.persisted? ? cat_rental_request_url(request.id) : cat_rental_requests_url %>" method="POST">
+  <% if request.persisted? %>
+    <input type="hidden" name="_method" value="PUT">
+  <% end %>
+
+
+
+
+  Name: <%= @request.cat.name %> </br>
+   <input type="date" name="request[start_date]" id="request_start_date" value = "<%= request.start_date %>"> <br>
+     <input type="date" name="request[end_date]" id="request_end_date" value = "<%= request.end_date %>"> <br>
+  Status: <%= @request.status %> <br>
+  <br>
+  <a href="<%= edit_cat_rental_request_url%>"> <button>Edit</button> </a>
+
+
+
+
+
+
+
+
+
+
+
+
+  <label for="request_name">Name</label>
+  <input type="text" name="request[name]" id = "request_name" value = "<%= request.name%>" > <br>
+
+  <label for="request_age" >Age</label>
+  <input type="text" name="request[age]" id = "request_age" value = "<%= request.age %>"> <br>
+
+
+  <input <%= "checked" if request.sex == "M" %> type="radio" name="request[sex]" value="M">Male
+  <input <%= "checked" if request.sex == "F" %> type="radio" name="request[sex]" value="F">Female <br>
+
+  <select name="request[color]" id="request_color">
+    <% Cat::COLORS.each do |color| %>
+      <option <%= "selected" if request.color == color %> value="<%= color %>"> <%= color %> </option>
+    <% end %>
+  </select> <br>
+
+  <input type="date" name="request[birth_date]" id="request_date" value = "<%= request.birth_date %>"> <br>
+
+  <br>
+
+  <input type="submit" value="submit_request">
+</form>
