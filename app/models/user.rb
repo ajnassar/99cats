@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   before_validation(:on => :create) do
     check_session_token
   end
-
   validates :user_name, :password_digest, :session_token, :presence => true
+  validates :user_name, :session_token, :uniqueness => true
 
   def reset_session_token!
     self.session_token = SecureRandom.base64
@@ -18,12 +18,12 @@ class User < ActiveRecord::Base
   end
 
   def password=(str)
-    @password = password #validate password later for length...
+    @password = str #validate password later for length...
     self.password_digest = BCrypt::Password.create(str)
   end
 
   def is_password?(str)
-    BCrypt::Password.new(self.password_digest).is_password?(password)
+    BCrypt::Password.new(self.password_digest).is_password?(str)
   end
 
   def self.find_by_credentials(user_name, password)

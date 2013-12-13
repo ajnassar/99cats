@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ninetyninecats</title>
+  <title>Nintendo cats</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <span style = "float:right">
+    <% unless session[:session_token].nil? %>
+      Welcome, <%= current_user.user_name %>
+      <form action = "<%= session_url %>" method = "POST">
+        <input type="hidden" name = "_method" value = "DELETE">
+        <input type="submit" value = "Logout">
+      </form>
+    <%else%>
+    <form action = "<%= new_session_url %>" method = "GET">
+      <input type="submit" value = "Login">
+    </form>
+    <%end%>
+  </span>
 <%= yield %>
 
 </body>
