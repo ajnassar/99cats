@@ -1,6 +1,6 @@
 Ninetyninecats::Application.routes.draw do
   resources :cats
   resources :cat_rental_requests
-  resources :users
+  resources :users, :only => [:new, :create]
   resource :session, :only => [:new, :destroy, :create]
 end

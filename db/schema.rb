@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212212918) do
+ActiveRecord::Schema.define(:version => 20131213011803) do
 
   create_table "cat_rental_requests", :force => true do |t|
     t.integer  "cat_id",     :null => false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20131212212918) do
     t.string  "color",      :null => false
     t.string  "name",       :null => false
     t.string  "sex",        :null => false
+    t.integer "user_id",    :null => false
   end
 
   create_table "users", :force => true do |t|

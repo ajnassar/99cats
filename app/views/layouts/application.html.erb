@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= flash.now[:errors] %>
   <span style = "float:right">
     <% unless session[:session_token].nil? %>
       Welcome, <%= current_user.user_name %>
@@ -15,9 +16,8 @@
         <input type="submit" value = "Logout">
       </form>
     <%else%>
-    <form action = "<%= new_session_url %>" method = "GET">
-      <input type="submit" value = "Login">
-    </form>
+      <%= link_to "Login", new_session_url %>
+      or <%= link_to "Sign Up", new_user_url %>
     <%end%>
   </span>
 <%= yield %>
